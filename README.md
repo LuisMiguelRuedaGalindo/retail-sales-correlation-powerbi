@@ -1,4 +1,4 @@
-# 🛒 Retail Sales & Correlation Analysis — Power BI
+# Retail Sales & Correlation Analysis — Power BI
 
 > Proyecto de análisis de ventas retail con aplicación de **estadística inferencial** (Covarianza y Coeficiente de Pearson) implementada manualmente en DAX dentro de Power BI Desktop.
 
@@ -35,36 +35,21 @@ El archivo `.pbix` contiene **3 páginas** con un flujo narrativo claro: portada
 ### Página 1 — `Presentacion` (Portada)
 Página de entrada con diseño visual profesional y botón de navegación hacia el dashboard principal. Establece el contexto del proyecto desde el primer vistazo.
 
-> 📸 **[FOTO: Pantalla de portada del reporte]**
->
-> *Cómo agregarla: Abre el archivo en Power BI Desktop → ve a la página "Presentacion" → toma un screenshot → guárdalo como `portada.png` en la carpeta `/assets/` de tu repositorio → reemplaza esta línea con:*
-> ```markdown
-> ![Portada](assets/portada.png)
-> ```
+> ![Portada](assets/Pagina1.png)
 
 ---
 
 ### Página 2 — `Transacciones Comerciales - Retail` (Dashboard principal)
 Dashboard completo de desempeño comercial con múltiples dimensiones de análisis. Responde las preguntas operativas del negocio: ¿dónde se vende más?, ¿cómo pagan los clientes?, ¿qué categorías lideran?
 
-> 📸 **[FOTO: Vista completa del dashboard de Transacciones Comerciales]**
->
-> *Cómo agregarla: Ve a la página "Transacciones Comerciales - Retail" → captura el dashboard completo → guarda como `dashboard_transacciones.png` en `/assets/` → usa:*
-> ```markdown
-> ![Dashboard Transacciones](assets/dashboard_transacciones.png)
-> ```
+> ![Dashboard Transacciones](assets/Pagina2.png)
 
 ---
 
 ### Página 3 — `Análisis de Correlación` ⭐ (Página estrella)
 La página más técnica y diferenciadora del proyecto. Combina un gráfico de dispersión con métricas estadísticas calculadas en DAX para determinar la naturaleza y fuerza de la relación entre cantidad vendida y ventas totales.
 
-> 📸 **[FOTO: Vista completa de la página de Análisis de Correlación]**
->
-> *Cómo agregarla: Ve a la página "Análisis de Correlación" → captura toda la página → guarda como `analisis_correlacion.png` en `/assets/` → usa:*
-> ```markdown
-> ![Análisis de Correlación](assets/analisis_correlacion.png)
-> ```
+> ![Análisis de Correlación](assets/pagina3.png)
 
 ---
 
@@ -86,12 +71,7 @@ La página más técnica y diferenciadora del proyecto. Combina un gráfico de d
 
 Compara el volumen de ventas entre los distintos puntos de venta, permitiendo identificar las tiendas de mayor y menor rendimiento de forma inmediata.
 
-> 📸 **[FOTO: Gráfico de ventas por tienda]**
->
-> *Cómo agregarla: Captura el visual → guarda como `ventas_tienda.png` → usa:*
-> ```markdown
-> ![Ventas por Tienda](assets/ventas_tienda.png)
-> ```
+> ![Ventas por Tienda](assets/ventasportienda.png)
 
 ---
 
@@ -107,12 +87,7 @@ Muestra la distribución de ventas según el medio de pago utilizado por los cli
 
 Visualiza la contribución de cada tipo de cliente al total de ventas en formato de embudo, ordenando los segmentos de mayor a menor impacto. Es ideal para identificar qué perfil de cliente genera más valor.
 
-> 📸 **[FOTO: Gráfico de embudo por tipo de cliente]**
->
-> *Cómo agregarla: Captura el visual → guarda como `funnel_cliente.png` → usa:*
-> ```markdown
-> ![Funnel por Tipo de Cliente](assets/funnel_cliente.png)
-> ```
+> ![Funnel por Tipo de Cliente](assets/Ventasportipodecliente.png)
 
 ---
 
@@ -121,12 +96,7 @@ Visualiza la contribución de cada tipo de cliente al total de ventas en formato
 
 Una de las visualizaciones más ricas del dashboard. Combina dos dimensiones — categoría de producto y tipo de cliente — mostrando cómo cambia el ranking de categorías según el segmento, con cintas que reflejan los cambios de posición en el tiempo.
 
-> 📸 **[FOTO: Gráfico de cinta por categoría y tipo de cliente]**
->
-> *Cómo agregarla: Captura el visual → guarda como `ribbon_categoria.png` → usa:*
-> ```markdown
-> ![Ribbon Chart Categorías](assets/ribbon_categoria.png)
-> ```
+> ![Ribbon Chart Categorías](assets/Cinta.png)
 
 ---
 
@@ -153,13 +123,24 @@ Esta sección es el corazón técnico del proyecto. En lugar de limitarse a visu
 
 La covarianza mide la **dirección** de la relación entre dos variables: si es positiva, ambas variables tienden a crecer juntas; si es negativa, cuando una sube la otra baja.
 
-> 📸 **[FOTO: Tarjeta con el valor de Covarianza en el reporte]**
->
-> *Cómo agregarla: Captura la tarjeta de Covarianza → guarda como `covarianza.png` → usa:*
-> ```markdown
-> ![Covarianza](assets/covarianza.png)
-> ```
+**Resultado obtenido en el reporte:**
 
+La covarianza calculada entre la cantidad vendida y las ventas totales es de 10,56 mil, un valor positivo que confirma que ambas variables se mueven en la misma dirección — cuando la cantidad vendida aumenta, las ventas totales también tienden a aumentar.
+
+> ![Covarianza](assets/covarianza.png)
+---
+**Fórmula matemática de referencia:**
+
+La covarianza se calcula sumando el producto de las desviaciones de cada observación respecto a su media (xᵢ - x̄) y (yᵢ - ȳ), dividido entre n-1. El denominador n-1 aplica la corrección de Bessel, usada cuando se trabaja con una muestra en lugar de la población completa.
+
+> ![Covarianza](assets/Formulacovarianza.png)
+---
+**Implementación en DAX:**
+
+La fórmula fue construida en 4 pasos usando variables intermedias: primero se calcula n con COUNTROWS, luego los promedios de ambas variables con AVERAGEX, después se crea una tabla intermedia con ADDCOLUMNS que calcula el producto de las desviaciones fila a fila, y finalmente SUMX suma todos esos productos para obtener la covarianza total.
+
+> ![Covarianza](assets/daxcovarianza.png
+)
 ---
 
 ###  Coeficiente de Correlación de Pearson — implementado manualmente en DAX
@@ -168,34 +149,25 @@ El Coeficiente de Pearson estandariza la covarianza para producir un valor entre
 
 La fórmula fue construida manualmente en DAX usando variables intermedias:
 
-```dax
-Correlation Quantity Discount =
-VAR AvgQ = AVERAGE(Sales[quantity])
-VAR AvgD = AVERAGE(Sales[Discount %])
-
-RETURN
-DIVIDE(
-    SUMX(
-        Sales,
-        (Sales[quantity] - AvgQ) *
-        (Sales[Discount %] - AvgD)
-    ),
-    SQRT(
-        SUMX(Sales, POWER(Sales[quantity] - AvgQ, 2)) *
-        SUMX(Sales, POWER(Sales[Discount %] - AvgD, 2))
-    )
-)
-```
-
 > Esta implementación replica matemáticamente la fórmula estándar de Pearson usando `SUMX` para iterar fila a fila sobre la tabla, `POWER` para calcular las desviaciones al cuadrado y `SQRT` para la raíz cuadrada — sin usar ninguna función estadística preconstruida.
 
-> 📸 **[FOTO: Tarjeta con el valor del Coeficiente de Pearson]**
->
-> *Cómo agregarla: Captura la tarjeta de Pearson → guarda como `pearson.png` → usa:*
-> ```markdown
-> ![Coeficiente de Pearson](assets/pearson.png)
-> ```
+**Resultado obtenido en el reporte:**
 
+El Coeficiente de Pearson entre la cantidad vendida y las ventas totales es 0.69, ubicándose en un rango de relación positiva moderada a fuerte. Al estar cercano a 1, indica que existe una tendencia lineal clara: a mayor cantidad vendida, mayores ventas totales.
+
+> ![Coeficiente de Pearson](assets/Coeficientepearzon.png)
+---
+**Fórmula matemática de referencia:**
+
+El coeficiente ρ se obtiene dividiendo la covarianza entre las dos variables (Cov_xy) entre el producto de sus desviaciones estándar (σx · σy). Este proceso estandariza la covarianza, eliminando el efecto de las unidades de medida y produciendo siempre un valor entre -1 y +1 que permite comparar relaciones entre distintas variables.
+
+> ![Coeficiente de Pearson](assets/formulaperarson.png)
+---
+**Implementación en DAX:**
+
+La fórmula reutiliza directamente la medida [covarianza] ya calculada y la divide entre el producto de las desviaciones estándar de ambas variables, obtenidas con STDEV.P. El uso de DIVIDE en lugar del operador / protege el cálculo ante posibles divisiones por cero, siguiendo buenas prácticas de desarrollo en DAX.
+
+> ![Coeficiente de Pearson](assets/daxPearson.png)
 ---
 
 ###  Gráfico de Dispersión (Scatter Chart)
@@ -203,12 +175,7 @@ DIVIDE(
 
 Visualiza la nube de puntos de la relación entre ambas variables, permitiendo confirmar visualmente la tendencia identificada por los coeficientes estadísticos.
 
-> 📸 **[FOTO: Scatter chart de ventas totales vs cantidad]**
->
-> *Cómo agregarla: Captura el scatter chart → guarda como `scatter_correlacion.png` → usa:*
-> ```markdown
-> ![Scatter Chart Correlación](assets/scatter_correlacion.png)
-> ```
+> ![Scatter Chart Correlación](assets/dispersion.png)
 
 ---
 
